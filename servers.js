@@ -2,7 +2,6 @@ const express = require('express');
 const fs = require("fs");
 const app = express();
 const port = 8080;
-let visitas = 1
 const server = app.listen(port, () => {
     console.log(`Servidor http escuchando en el puerto ${port}`)
 })
@@ -13,7 +12,6 @@ app.get('/productos', (req, res) => {
         return JSON.parse(rutaProds);
     }
     res.send(getProds())
-    visitas++
 })
 app.get('/productosRandom', (req, res) => {
     function getProdsRandom() {
@@ -22,5 +20,4 @@ app.get('/productosRandom', (req, res) => {
         return randomElement;
     }
     res.send(getProdsRandom());
-    visitas++
 })
