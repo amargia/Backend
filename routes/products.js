@@ -39,7 +39,6 @@ productosRouter.put("/:_id", (req, res) => {
 
 productosRouter.delete("/:_id", (req, res) => {
   try {
-    console.log(req.params);
     let data = Container.delete(req.params)
     res.status(200).send(data);
   } catch (error) {
