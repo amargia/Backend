@@ -1,91 +1,41 @@
 const fs = require ('fs');
 
-//const data = [];
-//let id = 0;
+const data = [];
+let id = 0;
 
-/* const list = () => {
+const list = () => {
   return data;
-}; */
-
-const getById = async (number) => {
-  try {
-      const productos = await fs.promises.readFile("./productos.txt", "utf-8");
-      const data = JSON.parse(productos);
-      let prod = data.find((i) => {
-          return i.id === number});
-      console.log(prod);
-  } catch (error) {
-      console.log(error);
-  }
 };
 
-/* const findOne = (id) => {
-  return data.find((tweet) => tweet.id === id);
-}; */
-
-const save = async (object) => {
-  try {
-      const productos = await fs.promises.readFile("./productos.txt", "utf-8");
-      console.log(productos);
-      const data = JSON.parse(productos);
-      if (data.length > 0) {
-          data.push({...object, id: data[data.length - 1].id + 1})
-      }else {
-          data.push({...object, id: 1})
-      }
-      fs.promises.writeFile("./productos.txt", JSON.stringify(data, null, 2))
-      return data[data.length - 1].id;
-  } catch (error) {
-      console.log("error de lectura", error);
-  }
+const findOne = (id) => {
+  return data.find((product) => product.id === id);
 };
 
-/* const add = (name, content) => {
-  const tweet = { id: ++id, name, content };
-  data.push(tweet);
-  return tweet;
-}; */
-
-const getAll = async () => {
-  try {
-      const productos = await fs.promises.readFile("./productos.txt", "utf-8");
-      return JSON.parse(productos);
-  } catch (error) {
-      console.log("error");
-  }
+const add = (title, price, thumbnail) => {
+  const product = { id: ++id, title, price, thumbnail };
+  data.push(product);
+  return product;
 };
 
-/* const findAllMatch = (name) => {
-  const newArr = data.filter((tweet) => tweet.name === name);
+const findAllMatch = (title) => {
+  const newArr = data.filter((product) => product.title === title);
   return newArr;
-}; */
-
-const deleteById = async (id) => {
-  try {
-      const productos = await fs.promises.readFile("./productos.txt", "utf-8");
-      const data = JSON.parse(productos);
-      const prod = data.filter((i) => i.id !== id);
-      fs.promises.writeFile("./productos.txt", JSON.stringify(prod, null, 2));
-      return prod;
-  } catch (error) {
-      console.log("error");
-  }
 };
 
-/* const remove = (id) => {
-  data.forEach((tweet, i) => {
-    if (tweet.id === id) data.splice(i, 1);
+const remove = (id) => {
+  data.forEach((product, i) => {
+    if (product.id === id) data.splice(i, 1);
   });
-}; */
+};
 
-/* const update = (id, newContent) => {
-  const tweet = findOne(id);
-  tweet.content = newContent;
-}; */
+const update = (id, newPrice) => {
+  const product = findOne(id);
+  product.price = newPrice;
+};
 
-module.exports = { save, getById, getAll, deleteById };
+module.exports = { list, findOne, add, findAllMatch, remove, update };
 
-const productos = [
+const products = [
  {
    title: "Escuadra",
    price: 123.45,
@@ -106,82 +56,6 @@ const productos = [
  }
 ];
 
-for (let i = 0; i < productos.length; i++) {
-  module.exports.save(productos[i].title, productos[i].price, productos[i].thumbnail);
+for (let i = 0; i < products.length; i++) {
+  module.exports.add(products[i].title, products[i].price, products[i].thumbnail);
 };
-
-/* const fs = require("fs");
-
-class Contenedor {
-    constructor (file) {
-        this.file = file + ".txt"
-    }
-    async save(object) {
-            try {
-                const productos = await fs.promises.readFile(this.file, "utf-8");
-                console.log(productos);
-                const data = JSON.parse(productos);
-                if (data.length > 0) {
-                    data.push({...object, id: data[data.length - 1].id + 1})
-                }else {
-                    data.push({...object, id: 1})
-                }
-                fs.promises.writeFile(this.file, JSON.stringify(data, null, 2))
-                return data[data.length - 1].id;
-            } catch (error) {
-                console.log("error de lectura", error);
-            }
-    }
-    async getById(number) {
-        try {
-            const productos = await fs.promises.readFile(this.file, "utf-8");
-            const data = JSON.parse(productos);
-            let prod = data.find((i) => {
-                return i.id === number});
-            console.log(prod);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    async getAll() {
-            try {
-                const productos = await fs.promises.readFile(this.file, "utf-8");
-                return JSON.parse(productos);
-            } catch (error) {
-                console.log("error");
-            }
-    }
-    async deleteById(id) {
-            try {
-                const productos = await fs.promises.readFile(this.file, "utf-8");
-                const data = JSON.parse(productos);
-                const prod = data.filter((i) => i.id !== id);
-                fs.promises.writeFile(this.file, JSON.stringify(prod, null, 2));
-                return prod;
-            } catch (error) {
-                console.log("error");
-            }
-    }
-    async deleteAll() {
-            try {
-                await fs.promises.writeFile(this.file, "[]");
-                console.log("");       
-            } catch (error) {
-                console.log("error");
-            }
-    }
-}
-
-const item = {
-    title: "lápiz",
-    price: 55,
-    thumbnail: "1234",
-}
-
-const desaf = new Contenedor("productos");
-module.exports = Contenedor; */
-//desaf.save(item);
-//desaf.getById(1);
-//desaf.getAll();
-//desaf.deleteById(1);
-//desaf.deleteAll();

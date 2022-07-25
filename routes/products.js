@@ -9,14 +9,42 @@ productosRouter.get("/", (req, res) => {
 });
 
 productosRouter.get("/:id", (req, res) => {
-  const { id } = req.params;
-  res.send(methodBank.getById(parseInt(id)));
+  try {
+    const { id } = req.params;
+    res.send(methodBank.findOne(parseInt(id)));
+  } catch (error) {
+    res.status(400).send("Producto no encontrado")
+  }
 });
 
 productosRouter.post("/", (req, res) => {
-  const { title, price } = req.body;
-  const prod = Container.save(title, price);
-  res.status(201).send(prod);
+  try {
+    const { title, price, thumbnail } = req.body;
+    const prod = Container.create(title, price, thumbnail);
+    res.status(201).send(prod);   
+  } catch (error) {
+    res.status(400).send("No se pudo crear el producto")
+  }
 });
+
+productosRouter.put("/:_id", (req, res) => {
+  try {
+    console.log(req.params);
+    let updateProd = Container.update(req.params, {$set: req.body});
+    res.status(200).send(updateProd);
+  } catch (error) {
+    res.status(400).send("No se pudo actualizar el producto");
+  }
+});
+
+productosRouter.delete("/:_id", (req, res) => {
+  try {
+    console.log(req.params);
+    let data = Container.delete(req.params)
+    res.status(200).send(data);
+  } catch (error) {
+    res.status(400).send("No se pudo eliminar el producto")
+  }
+})
 
 module.exports = productosRouter;
