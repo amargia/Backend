@@ -30,7 +30,7 @@ productosRouter.post("/", (req, res) => {
 productosRouter.put("/:id", (req, res) => {
   try {
     console.log(req.params);
-    let updateProd = Container.update(req.params.id, {$set: req.body});
+    let updateProd = Container.update(req.params, {$set: req.body});
     res.status(200).send(updateProd);
   } catch (error) {
     res.status(400).send("No se pudo actualizar el producto");
