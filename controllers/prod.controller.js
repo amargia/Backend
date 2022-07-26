@@ -11,8 +11,8 @@ class Container {
     return prod;
   }
 
-  static update(id, newPrice) {
-    const updateProd = methodBank.update(id, newPrice)
+  static update(id, newPrice, newTitle, newThumbnail) {
+    const updateProd = methodBank.update(id, newPrice, newTitle, newThumbnail)
     return updateProd;
   }
 
