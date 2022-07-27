@@ -33,7 +33,7 @@ productosRouter.put("/:id", (req, res) => {
     res.status(200).send(updateProd);
   } catch (error) {
     console.log(error);
-    res.status(400).send(error);
+    res.status(400).send("No se pudo actualizar el producto");
   }
 });
 
