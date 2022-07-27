@@ -29,17 +29,17 @@ productosRouter.post("/", (req, res) => {
 
 productosRouter.put("/:id", (req, res) => {
   try {
-    console.log(req.params);
-    let updateProd = Container.update(req.params, {$set: req.body});
+    let updateProd = Container.update(req.params, req.body);
     res.status(200).send(updateProd);
   } catch (error) {
-    res.status(400).send("No se pudo actualizar el producto");
+    console.log(error);
+    res.status(400).send(error);
   }
 });
 
 productosRouter.delete("/:id", (req, res) => {
   try {
-    let data = Container.delete(req.params.id)
+    let data = Container.delete(parseInt(req.params.id));
     res.status(200).send(data);
   } catch (error) {
     res.status(400).send("No se pudo eliminar el producto")

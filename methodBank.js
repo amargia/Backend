@@ -28,11 +28,11 @@ const remove = (id) => {
   });
 };
 
-const update = (id, newPrice, newTitle, newThumbnail) => {
-  const product = findOne(id);
-  product.price = newPrice;
-  product.title = newTitle;
-  product.thumbnail = newThumbnail;
+const update = (id, newProduct) => {
+  const data = findOne(id);
+  data.title = newProduct.title;
+  data.price = newProduct.price;
+  data.thumbnail = newProduct.thumbnail;
 };
 
 module.exports = { list, findOne, add, findAllMatch, remove, update };

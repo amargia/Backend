@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const router = require('./routes/products');
+const router = require('./routes/index');
 
 let PORT = 8080
 const server = app.listen(PORT,()=>{
