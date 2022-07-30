@@ -28,8 +28,8 @@ const remove = (id) => {
   });
 };
 
-const update = (id, newProduct) => {
-  const data = findOne(id);
+const update = ({id}, newProduct) => {
+  const data = findOne(parseInt(id));
   data.title = newProduct.title;
   data.price = newProduct.price;
   data.thumbnail = newProduct.thumbnail;
