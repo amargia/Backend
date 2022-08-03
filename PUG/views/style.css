@@ -1,0 +1,20 @@
+body {
+    background-color: #2b023b;
+}
+form, h1 { 
+    margin: 0 auto;
+    width: 50%;
+}
+label, h1 {
+    color: white;
+}
+btn {
+    background-color: #e9b0ff;
+    color: #2b023b;
+    border-color: #2b023b;
+}
+.btn:hover {
+    background-color: #2b023b;
+    color: #e9b0ff;
+    border-color: #e9b0ff;
+}

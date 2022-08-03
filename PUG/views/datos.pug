@@ -1,32 +1,11 @@
 html
     head 
-        title=titulo
-        link(rel="stylesheet", href="style.css")
+        title=PUG
+        link(rel="stylesheet", href="./style.css")
         link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css")
-        style. 
-            body {
-                background-color: #2b023b;
-            }
-            form, h1 { 
-                margin: 0 auto;
-                width: 50%;
-            }
-            label, h1 {
-                color: white;
-            }
-            btn {
-                background-color: #e9b0ff;
-                color: #2b023b;
-                border-color: #2b023b;
-            }
-            .btn:hover {
-                background-color: #2b023b;
-                color: #e9b0ff;
-                border-color: #e9b0ff;
-            }
     body 
         h1="Cargar productos" 
-        form(action="/datos")
+        form(action="/datos" method="post")
             div(class="form-group")
                 label(for="title")= "Nombre producto"
                 input(type="text" class="form-control" id="title" name="title" placeholder="Nombre producto")
@@ -36,4 +15,7 @@ html
             div(class="form-group")
                 label(for="thumbnail")="Imagen"
                 input(type="file" class="form-control" id="thumbnail" name="thumbnail" placeholder="Imagen")
-            button(type="submit" class="btn btn-primary")="Enviar"
+            button(type="submit" class="btn")="Enviar"
+        
+        div
+            include partials/lista.pug
