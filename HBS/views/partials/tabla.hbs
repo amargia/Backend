@@ -1,0 +1,22 @@
+<thead>
+    <tr>
+        <th scope="col"class="col">Producto</th>
+        <th scope="col"class="col">Precio</th>
+        <th scope="col"class="col">Imagen</th>
+    </tr>
+</thead>
+<tbody>
+    {{#if data}} 
+        {{#each data}}
+			<tr>
+				<td class="text"> {{this.title}}</td>
+				<td class="text"> {{this.price}}</td>
+				<td class="text"><img src="{{this.thumbnail}}"></td>                  
+			</tr>
+	    {{/each}}     	
+    {{else}} 	
+    <tr>
+        <td colspan="3">No hay datos</td>
+    </tr>	
+    {{/if}}
+</tbody>
